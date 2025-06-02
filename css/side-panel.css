@@ -1,0 +1,104 @@
+.side-panel {
+    position: absolute;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.side-panel.active {
+    right: 0;
+}
+
+.side-panel-header {
+    padding: 15px;
+    background-color: #8b4513;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.side-panel-header h2 {
+    margin: 0;
+    font-family: 'Cinzel', serif;
+}
+
+.close-side-panel {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.poi-list {
+    padding: 15px;
+}
+
+.poi-card {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.poi-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.poi-image-placeholder {
+    width: 100%;
+    height: 150px;
+    background-color: #eee;
+}
+
+.poi-content {
+    padding: 15px;
+}
+
+.poi-title {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-family: 'Cinzel', serif;
+}
+
+.poi-category {
+    display: block;
+    color: #8b4513;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.poi-description {
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.poi-location {
+    font-size: 0.8em;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.poi-button {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #8b4513;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.poi-button:hover {
+    background-color: #6b3000;
+}
