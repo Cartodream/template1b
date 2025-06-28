@@ -8,7 +8,8 @@
     box-shadow: -2px 0 5px rgba(0,0,0,0.2);
     transition: right 0.3s ease;
     z-index: 1000;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .side-panel.active {
@@ -22,6 +23,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .side-panel-header h2 {
@@ -39,6 +41,8 @@
 
 .poi-list {
     padding: 15px;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .poi-card {
