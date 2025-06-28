@@ -19,6 +19,9 @@ function initMap() {
         maxZoom: 20,
         scrollWheelZoom: true
     });
+    
+    // Exposer la variable globalement
+    window.map = map;
 
     // Ajout du fond de carte OpenStreetMap avec HTTPS pour éviter les problèmes de chargement mixte
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -129,6 +132,9 @@ function initMap() {
                 }
             }
         });
+        
+        // Exposer la variable globalement pour le panneau latéral
+        window.rivieresLayer = rivieresLayer;
     }
 
     // Chargement des points d'intérêt
@@ -408,6 +414,14 @@ function selectAllFilters() {
     });
     
     updateMarkers();
+    
+    // Mettre à jour le panneau latéral s'il est ouvert
+    const sidePanel = document.getElementById('side-panel');
+    if (sidePanel && sidePanel.classList.contains('active')) {
+        // Déclencher l'événement de mise à jour du panneau latéral
+        const event = new CustomEvent('filtersChanged');
+        document.dispatchEvent(event);
+    }
 }
 
 // Désélectionner tous les filtres
@@ -426,6 +440,14 @@ function deselectAllFilters() {
     });
     
     updateMarkers();
+    
+    // Mettre à jour le panneau latéral s'il est ouvert
+    const sidePanel = document.getElementById('side-panel');
+    if (sidePanel && sidePanel.classList.contains('active')) {
+        // Déclencher l'événement de mise à jour du panneau latéral
+        const event = new CustomEvent('filtersChanged');
+        document.dispatchEvent(event);
+    }
 }
 
 // Initialisation au chargement de la page

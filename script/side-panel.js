@@ -43,12 +43,20 @@ document.addEventListener('DOMContentLoaded', function() {
             return activeFilters[category] && activeFilters[category].includes(subcategory);
         });
         
-        // Afficher les POIs filtrés
-        if (filteredPois.length === 0) {
+        // Ajouter les rivières si le filtre "etangs_et_rivières" est actif
+        let filteredRivieres = [];
+        if (activeFilters['patrimoine_naturel'] && activeFilters['patrimoine_naturel'].includes('etangs_et_rivières') && typeof rivieres_opth !== 'undefined') {
+            filteredRivieres = rivieres_opth.features.filter(feature => feature.properties.nom);
+        }
+        
+        // Vérifier s'il y a des éléments à afficher
+        const totalItems = filteredPois.length + filteredRivieres.length;
+        if (totalItems === 0) {
             poiListContainer.innerHTML = '<div class="no-results">Aucun point d\'intérêt ne correspond à votre recherche.</div>';
             return;
         }
         
+        // Afficher les POIs filtrés
         filteredPois.forEach(poi => {
             const properties = poi.properties;
             
@@ -105,6 +113,76 @@ document.addEventListener('DOMContentLoaded', function() {
             
             poiListContainer.appendChild(card);
         });
+        
+        // Afficher les rivières filtrées
+        filteredRivieres.forEach(riviere => {
+            const properties = riviere.properties;
+            
+            // Création de la carte pour les rivières
+            const card = document.createElement('div');
+            card.className = 'poi-card';
+            
+            // Image
+            let imageHtml = '';
+            if (properties.photo) {
+                imageHtml = `<img src="${properties.photo}" alt="${properties.nom}" class="poi-image">`;
+            } else {
+                imageHtml = `<div class="poi-image-placeholder"></div>`;
+            }
+            
+            // Contenu de la carte
+            card.innerHTML = `
+                ${imageHtml}
+                <div class="poi-content">
+                    <h3 class="poi-title">${properties.nom}</h3>
+                    <span class="poi-category">Etangs et Rivières</span>
+                    <p class="poi-description">${properties.descriptif || 'Aucune description disponible.'}</p>
+                    <div class="poi-location">
+                        <i class="fas fa-water"></i> Cours d'eau
+                    </div>
+                    <a href="#" class="poi-button riviere-button">Voir sur la carte</a>
+                </div>
+            `;
+            
+            // Ajouter un gestionnaire d'événements pour le bouton "Voir sur la carte"
+            const viewButton = card.querySelector('.poi-button');
+            viewButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Calculer les limites de la rivière pour l'afficher entièrement
+                if (riviere.geometry) {
+                    let allCoords = [];
+                    
+                    if (riviere.geometry.type === 'LineString') {
+                        allCoords = riviere.geometry.coordinates;
+                    } else if (riviere.geometry.type === 'MultiLineString') {
+                        // Pour MultiLineString, concaténer toutes les coordonnées
+                        riviere.geometry.coordinates.forEach(line => {
+                            allCoords = allCoords.concat(line);
+                        });
+                    }
+                    
+                    if (allCoords.length > 0) {
+                        // Calculer les limites (bounds) de la rivière
+                        let minLat = allCoords[0][1], maxLat = allCoords[0][1];
+                        let minLng = allCoords[0][0], maxLng = allCoords[0][0];
+                        
+                        allCoords.forEach(coord => {
+                            minLat = Math.min(minLat, coord[1]);
+                            maxLat = Math.max(maxLat, coord[1]);
+                            minLng = Math.min(minLng, coord[0]);
+                            maxLng = Math.max(maxLng, coord[0]);
+                        });
+                        
+                        // Ajuster la vue pour montrer toute la rivière
+                        const bounds = [[minLat, minLng], [maxLat, maxLng]];
+                        map.fitBounds(bounds, {padding: [20, 20]});
+                    }
+                }
+            });
+            
+            poiListContainer.appendChild(card);
+        });
     }
     
     // Mettre à jour la liste des POIs lorsque les filtres changent
@@ -114,5 +192,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 updatePoiList();
             }
         });
+    });
+    
+    // Écouter l'événement personnalisé pour les changements de filtres
+    document.addEventListener('filtersChanged', function() {
+        if (sidePanel.classList.contains('active')) {
+            updatePoiList();
+        }
     });
 });
