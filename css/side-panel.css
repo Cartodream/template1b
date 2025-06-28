@@ -17,7 +17,7 @@
 
 .side-panel-header {
     padding: 15px;
-    background-color: #8b4513;
+    background-color: #87A96B;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -73,7 +73,7 @@
 
 .poi-category {
     display: block;
-    color: #8b4513;
+    color: #87A96B;
     margin-bottom: 10px;
     font-size: 0.9em;
 }
@@ -92,7 +92,7 @@
 .poi-button {
     display: inline-block;
     padding: 5px 10px;
-    background-color: #8b4513;
+    background-color: #87A96B;
     color: white;
     text-decoration: none;
     border-radius: 3px;
@@ -100,5 +100,5 @@
 }
 
 .poi-button:hover {
-    background-color: #6b3000;
+    background-color: #6B8A52;
 }
