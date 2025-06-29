@@ -24,13 +24,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Récupérer les filtres actifs
         const activeFilters = {};
-        for (const category in categoryFilters) {
-            for (const subcategory in categoryFilters[category]) {
-                if (categoryFilters[category][subcategory]) {
-                    if (!activeFilters[category]) {
-                        activeFilters[category] = [];
+        if (typeof categoryFilters !== 'undefined') {
+            for (const category in categoryFilters) {
+                for (const subcategory in categoryFilters[category]) {
+                    if (categoryFilters[category][subcategory]) {
+                        if (!activeFilters[category]) {
+                            activeFilters[category] = [];
+                        }
+                        activeFilters[category].push(subcategory);
                     }
-                    activeFilters[category].push(subcategory);
                 }
             }
         }
@@ -96,16 +98,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 map.setView([poi.geometry.coordinates[1], poi.geometry.coordinates[0]], 16);
                 
                 // Trouver le marqueur correspondant
-                for (const category in allMarkers) {
-                    for (const subcategory in allMarkers[category]) {
-                        const marker = allMarkers[category][subcategory].find(m => 
-                            m.getLatLng().lat === poi.geometry.coordinates[1] && 
-                            m.getLatLng().lng === poi.geometry.coordinates[0]
-                        );
-                        if (marker) {
-                            // Ouvrir le popup du marqueur
-                            marker.openPopup();
-                            return;
+                if (typeof allMarkers !== 'undefined') {
+                    for (const category in allMarkers) {
+                        for (const subcategory in allMarkers[category]) {
+                            const marker = allMarkers[category][subcategory].find(m => 
+                                m.getLatLng().lat === poi.geometry.coordinates[1] && 
+                                m.getLatLng().lng === poi.geometry.coordinates[0]
+                            );
+                            if (marker) {
+                                // Ouvrir le popup du marqueur
+                                marker.openPopup();
+                                return;
+                            }
                         }
                     }
                 }

@@ -1,10 +1,11 @@
-/* Style inspiré de la carte interactive de Laval */
+/* LAVAL STYLE - PRIORITÉ HAUTE - Écrase viking-theme.css pour le layout fonctionnel */
+/* Ce fichier contient les styles critiques pour le fonctionnement de la carte */
 
 /* Conteneur principal de la carte */
 .main-container {
     position: relative;
     display: block;
-    height: calc(100vh - 80px); /* Hauteur calculée pour aller jusqu'en bas de la page */
+    height: calc(100vh - 130px); /* Hauteur réduite pour éviter la barre Windows */
 }
 
 /* Conteneur de la carte */
@@ -134,11 +135,11 @@
 /* Contrôles en bas à droite de la carte */
 .map-controls {
     position: absolute;
-    bottom: 100px; /* Position au-dessus de l'échelle */
-    right: 10px;
+    bottom: 180px; /* Position bien au-dessus de l'échelle */
+    right: 15px;
     z-index: 800;
     display: flex;
-    flex-direction: column; /* Empiler verticalement */
+    flex-direction: column;
     gap: 5px;
 }
 

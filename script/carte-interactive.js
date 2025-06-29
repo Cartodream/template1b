@@ -171,30 +171,14 @@ function createCustomIcon(category) {
     });
 }
 
-// Fonction pour normaliser une chaîne (pour les noms de fichiers d'icônes)
-function normalizeString(str) {
-    if (!str) return 'default';
-    
-    return str.toLowerCase()
-        .replace(/ /g, '_')
-        .replace(/[àáâãäå]/g, 'a')
-        .replace(/æ/g, 'ae')
-        .replace(/ç/g, 'c')
-        .replace(/[èéêë]/g, 'e')
-        .replace(/[ìíîï]/g, 'i')
-        .replace(/ñ/g, 'n')
-        .replace(/[òóôõö]/g, 'o')
-        .replace(/œ/g, 'oe')
-        .replace(/[ùúûü]/g, 'u')
-        .replace(/[ýÿ]/g, 'y')
-        .replace(/'/g, '');
-}
+// Fonction normalizeString maintenant dans shared-functions.js
 
 // Fonction pour mapper les catégories du jeu de données aux catégories de filtres
 function mapToFilterCategory(category) {
     const categoryMap = {
         'Patrimoine Architectural': 'patrimoine_architectural',
         'Patrimoine Naturel': 'patrimoine_naturel',
+        'Patrimoine Mémoriel': 'patrimoine_memoriel',
         'Autres Points': 'autres_points',
     };
     
@@ -219,6 +203,9 @@ function mapToFilterSubcategory(subcategory) {
         'Chauve Souris': 'chauve_souris',
         'Cervidés': 'cervidés',
         'Hirondelle': 'hirondelle',
+        'Personnages célèbres': 'personnages_célèbres',
+        'Musées': 'musées',
+        'Lieux de Mémoire': 'lieux_de_mémoire',
         'Curiosité': 'curiosité',
     };
     
@@ -245,6 +232,11 @@ function initFilters() {
             'chauve_souris': false,
             'cervidés': false,
             'hirondelle': false
+        },
+        'patrimoine_memoriel': {
+            'personnages_célèbres': false,
+            'musées': false,
+            'lieux_de_mémoire': false
         },
         'autres_points': {
             'curiosité': false

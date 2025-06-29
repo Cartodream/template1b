@@ -34,25 +34,27 @@ function createOptimizedMarkers() {
         // Stockage des données pour la popup sans la créer immédiatement
         marker.poiData = feature.properties;
         
-        // Ajouter un gestionnaire d'événements pour créer la popup à la demande
-        marker.on('click', function() {
-            if (!this.getPopup()) {
-                const popupContent = createPopupContent(this.poiData);
-                this.bindPopup(popupContent, {
-                    maxWidth: window.innerWidth > 768 ? 300 : 250,
-                    minWidth: window.innerWidth > 768 ? 200 : 150,
-                    closeOnClick: true,
-                    autoClose: true,
-                    autoPanPadding: [10, 10]
-                });
-            }
-        });
+
         
         // Gestion spéciale pour les bassins
         if (feature.properties.nom === "Orchidées sauvages - Bassin de la Vaucouleurs") {
             setupBassinHandler(marker, bassinVaucouleursLayer);
         } else if (feature.properties.nom === "Orchidées sauvages - Bassin de la Vesgre") {
             setupBassinHandler(marker, bassinVesgreLayer);
+        } else {
+            // Ajouter un gestionnaire d'événements pour créer la popup à la demande
+            marker.on('click', function() {
+                if (!this.getPopup()) {
+                    const popupContent = createPopupContent(this.poiData);
+                    this.bindPopup(popupContent, {
+                        maxWidth: window.innerWidth > 768 ? 300 : 250,
+                        minWidth: window.innerWidth > 768 ? 200 : 150,
+                        closeOnClick: true,
+                        autoClose: true,
+                        autoPanPadding: [10, 10]
+                    });
+                }
+            });
         }
         
         // Stockage du marqueur avec ses catégories pour le filtrage
@@ -151,6 +153,18 @@ function createPopupContent(properties) {
 
 // Fonction pour configurer les gestionnaires d'événements pour les bassins
 function setupBassinHandler(marker, bassinLayer) {
+    // Créer la popup pour les marqueurs de bassin
+    if (!marker.getPopup()) {
+        const popupContent = createPopupContent(marker.poiData);
+        marker.bindPopup(popupContent, {
+            maxWidth: window.innerWidth > 768 ? 300 : 250,
+            minWidth: window.innerWidth > 768 ? 200 : 150,
+            closeOnClick: true,
+            autoClose: true,
+            autoPanPadding: [10, 10]
+        });
+    }
+    
     marker.on('click', function(e) {
         L.DomEvent.stopPropagation(e);
         if (bassinLayer) {
@@ -160,13 +174,11 @@ function setupBassinHandler(marker, bassinLayer) {
             marker.addTo(map);
             // Ajouter la couche du bassin
             map.addLayer(bassinLayer);
-            // Ouvrir d'abord le popup
+            // Ouvrir le popup
             marker.openPopup();
             // Puis ajuster la vue avec un délai pour éviter les conflits
             setTimeout(function() {
-                // Utiliser {animate: false} pour éviter les problèmes avec le popup
                 map.fitBounds(bassinLayer.getBounds(), {animate: false});
-                // S'assurer que le popup reste ouvert après le zoom
                 if (!marker.isPopupOpen()) {
                     marker.openPopup();
                 }

@@ -18,20 +18,19 @@
     <!-- Google Fonts - Polices pour le thème viking -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Notre CSS personnalisé -->
-    <!-- Styles critiques chargés immédiatement -->
+    <!-- CSS OPTIMISÉ - ARCHITECTURE STABLE -->
+    <!-- 1. Thème décoratif (styles layout désactivés) -->
     <link rel="stylesheet" href="css/viking-theme.css">
     <link rel="stylesheet" href="css/viking-decorations.css">
     <link rel="stylesheet" href="css/combined-lightbox.css">
+    <!-- 2. Layout fonctionnel (PRIORITÉ HAUTE) -->
     <link rel="stylesheet" href="css/laval-style.css">
+    <!-- 3. Composants (chargement direct optimisé) -->
     <link rel="stylesheet" href="css/side-panel.css">
+    <link rel="stylesheet" href="css/mobile-fix.css">
+    <link rel="stylesheet" href="css/map-controls.css">
     
-    <!-- Les styles non critiques seront chargés de manière différée par deferred-loading.js -->
-    
-    <!-- Script pour l'indicateur de chargement -->
-    <script src="script/loading-indicator.js"></script>
-    
-    <!-- Script pour forcer les filtres par défaut -->
+    <!-- Scripts critiques -->
     <script src="script/force-default-filters.js"></script>
 </head>
 <body>
@@ -83,6 +82,15 @@
                     </div>
                     
                     <div class="filter-group">
+                        <h3 class="filter-title">Patrimoine Mémoriel</h3>
+                        <div class="filter-options" style="display: none;">
+                            <label><input type="checkbox" data-category="patrimoine_memoriel" data-subcategory="personnages_célèbres"> Personnages célèbres</label>
+                            <label><input type="checkbox" data-category="patrimoine_memoriel" data-subcategory="musées"> Musées</label>
+                            <label><input type="checkbox" data-category="patrimoine_memoriel" data-subcategory="lieux_de_mémoire"> Lieux de Mémoire</label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
                         <h3 class="filter-title">Autres Points</h3>
                         <div class="filter-options" style="display: none;">
                             <label><input type="checkbox" data-category="autres_points" data-subcategory="curiosité"> Curiosité</label>
@@ -124,12 +132,12 @@
     <!-- Modal pour l'agrandissement des images -->
     <div class="image-modal">
         <span class="close-modal"><i class="fas fa-times"></i></span>
-        <div class="modal-content viking-parchment">
+        <div class="modal-content">
             <img id="modal-img" src="" alt="Image agrandie">
             <div class="slideshow-controls">
-                <button class="prev-slide viking-button"><i class="fas fa-chevron-left"></i></button>
+                <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
                 <span class="slide-counter">1/2</span>
-                <button class="next-slide viking-button"><i class="fas fa-chevron-right"></i></button>
+                <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
         <div class="image-caption"></div>
@@ -143,6 +151,9 @@
     
     <!-- jQuery -->
     <script src="script/jquery.js"></script>
+    
+    <!-- Fonctions partagées -->
+    <script src="script/shared-functions.js"></script>
     
     <!-- Données -->
     <script src="donnees/POI.js"></script>
@@ -158,13 +169,11 @@
     <!-- Script pour la lightbox et le diaporama -->
     <script src="script/combined-lightbox.js"></script>
     
-    <!-- Scripts d'amélioration de l'interface -->
-    <script src="script/modern-enhancements.js"></script>
+
     
     <!-- Script pour gérer le panneau latéral -->
     <script src="script/side-panel.js"></script>
     
-    <!-- Script pour le chargement différé des ressources -->
-    <script src="script/deferred-loading.js"></script>
+
 </body>
 </html>

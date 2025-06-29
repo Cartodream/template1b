@@ -1,4 +1,5 @@
-/* Viking Theme - Main Styles */
+/* VIKING THEME - PRIORITÉ BASSE - Styles décoratifs écrasés par laval-style.css */
+/* ATTENTION: Les styles .main-container, #map-container, .filters-panel sont écrasés par laval-style.css */
 :root {
   --primary: #8B4513; /* Marron bois */
   --secondary: #CD853F; /* Brun clair */
@@ -23,8 +24,8 @@ body {
   background-color: var(--light);
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L60 60 M60 0 L0 60' stroke='%23D2B48C' stroke-width='1' fill='none' opacity='0.1'/%3E%3C/svg%3E");
   margin: 0;
-  padding: 0;
-  height: 100vh;
+  padding: 0 0 50px 0;
+  height: calc(100vh - 50px);
   overflow: hidden;
 }
 
@@ -66,27 +67,13 @@ body {
   margin: 0;
 }
 
-/* Main Container */
-.main-container {
-  display: flex;
-  flex: 1;
-  position: relative;
-  background: var(--light);
-}
+/* Main Container - DÉSACTIVÉ - Voir laval-style.css */
+/* .main-container géré par laval-style.css pour le layout fonctionnel */
 
 /* Filters Panel */
-.filters-panel {
-  width: 320px;
-  background: #F5F5DC url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L100,100 M100,0 L0,100' stroke='%23D2B48C' stroke-width='1' opacity='0.2'/%3E%3C/svg%3E");
-  box-shadow: var(--shadow);
-  padding: 1.5rem;
-  overflow-y: auto;
-  z-index: 900;
-  transition: var(--transition);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  border-right: 4px solid var(--primary);
-  border-bottom: 4px solid var(--primary);
-}
+/* .filters-panel - DÉSACTIVÉ - Voir laval-style.css */
+/* Layout et positionnement gérés par laval-style.css */
+/* Seuls les styles décoratifs viking restent actifs ci-dessous */
 
 .filters-panel .logo-container {
   display: flex;
@@ -264,21 +251,11 @@ body {
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* Map Container */
-#map-container {
-  flex: 1;
-  position: relative;
-}
+/* Map Container - DÉSACTIVÉ - Voir laval-style.css */
+/* #map-container géré par laval-style.css pour le layout fonctionnel */
 
-#map {
-  height: 100%;
-  width: 100%;
-  min-height: 600px;
-  z-index: 1;
-  border: 5px solid var(--primary);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
+/* #map - DÉSACTIVÉ - Voir laval-style.css */
+/* Styles de carte gérés par laval-style.css pour le fonctionnement */
 
 .toggle-filters-btn {
   position: absolute;
@@ -439,7 +416,7 @@ body {
 
 /* Leaflet Custom Styles */
 .leaflet-popup {
-  min-width: 350px;
+  min-width: 500px;
   max-width: 90vw;
 }
 
@@ -456,7 +433,7 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.5;
-  min-width: 350px;
+  min-width: 00px;
   max-width: 500px;
   position: relative;
   width: auto !important;
@@ -477,17 +454,19 @@ body {
 
 .popup-container {
   display: flex;
+  width: 100px;
   padding: 1rem;
   width: 100%;
 }
 
 .popup-text {
   flex: 1;
+   max-width: 200px;
   padding-right: 1rem;
 }
 
 .popup-image {
-  width: 150px;
+  max-width: 200px;
   flex-shrink: 0;
   position: relative;
   margin: 0 auto;
