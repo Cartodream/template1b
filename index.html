@@ -113,6 +113,9 @@
                     <button class="map-control-btn" title="Liste" id="toggle-list-btn">
                         <img src="image/bookmark-icon.svg" alt="Liste">
                     </button>
+                    <button class="fondation-logo" id="toggle-fondation-btn" title="Fondation">
+                        <img src="image/fondation.jpg" alt="Fondation">
+                    </button>
                 </div>
             </div>
         </div>
@@ -126,6 +129,20 @@
         </div>
         <div class="poi-list" id="poi-list">
             <!-- Les POIs seront générés ici par JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Panneau latéral pour la fondation -->
+    <div class="side-panel" id="fondation-panel">
+        <div class="side-panel-header">
+            <h2>Fondation du Patrimoine</h2>
+            <button class="close-fondation-panel"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="fondation-content" style="position: sticky; top: 0; background: white; z-index: 1000; padding: 20px; border-bottom: 1px solid #ddd;">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <div class="fondation-poi-list" id="fondation-poi-list">
+            <!-- Les POIs avec fondation_courant seront générés ici -->
         </div>
     </div>
 
@@ -173,6 +190,9 @@
     
     <!-- Script pour gérer le panneau latéral -->
     <script src="script/side-panel.js"></script>
+    
+    <!-- Script pour gérer le panneau de fondation -->
+    <script src="script/fondation-panel.js"></script>
     
 
 </body>
